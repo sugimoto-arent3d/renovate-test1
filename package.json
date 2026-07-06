@@ -6,6 +6,7 @@
   "dependencies": {
     "lodash": "4.17.15",
     "is-odd": "3.0.1",
-    "is-even": "1.0.0"
+    "is-even": "1.0.0",
+    "ms": "2.0.0"
   }
 }
