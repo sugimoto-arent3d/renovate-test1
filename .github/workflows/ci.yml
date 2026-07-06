@@ -1,0 +1,11 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  status-check:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Simulate CI check
+        run: sleep 5

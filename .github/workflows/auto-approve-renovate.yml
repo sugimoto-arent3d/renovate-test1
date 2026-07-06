@@ -13,3 +13,17 @@ jobs:
       app-id: ${{ vars.APPROVE_APP_ID }}
     secrets:
       app-private-key: ${{ secrets.APPROVE_APP_PRIVATE_KEY }}
+
+  enable-auto-merge:
+    if: |
+      github.event.pull_request.user.login == 'renovate[bot]' &&
+      contains(github.event.pull_request.body, '**Automerge**: Enabled')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Enable auto-merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge "${{ github.event.pull_request.number }}" --auto --squash --repo "${{ github.repository }}"
