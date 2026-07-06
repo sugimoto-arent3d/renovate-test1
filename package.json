@@ -4,6 +4,7 @@
   "private": true,
   "description": "Renovate auto-merge verification sandbox",
   "dependencies": {
-    "lodash": "4.17.15"
+    "lodash": "4.17.15",
+    "is-odd": "3.0.0"
   }
 }
