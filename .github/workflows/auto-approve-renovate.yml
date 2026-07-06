@@ -5,25 +5,20 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  approve:
+  approve-and-enable-automerge:
     if: github.event.pull_request.user.login == 'renovate[bot]'
-    uses: ./.github/workflows/approve-pr.yml
-    with:
-      pr-number: ${{ github.event.pull_request.number }}
-      app-id: ${{ vars.APPROVE_APP_ID }}
-    secrets:
-      app-private-key: ${{ secrets.APPROVE_APP_PRIVATE_KEY }}
-
-  enable-auto-merge:
-    if: |
-      github.event.pull_request.user.login == 'renovate[bot]' &&
-      contains(github.event.pull_request.body, '**Automerge**: Enabled')
     runs-on: ubuntu-24.04
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
     steps:
+      - name: Approve PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr review "${{ github.event.pull_request.number }}" --approve --repo "${{ github.repository }}"
+
       - name: Enable auto-merge
+        if: "contains(github.event.pull_request.body, '**Automerge**: Enabled')"
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh pr merge "${{ github.event.pull_request.number }}" --auto --squash --repo "${{ github.repository }}"
