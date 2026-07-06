@@ -5,6 +5,6 @@
   "description": "Renovate auto-merge verification sandbox",
   "dependencies": {
     "lodash": "4.17.15",
-    "is-odd": "3.0.0"
+    "is-odd": "3.0.1"
   }
 }
