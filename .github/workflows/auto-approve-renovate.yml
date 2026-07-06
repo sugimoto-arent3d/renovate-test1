@@ -1,0 +1,15 @@
+name: Auto-approve Renovate PRs
+
+on:
+  pull_request:
+    types: [auto_merge_enabled]
+
+jobs:
+  approve:
+    if: github.event.pull_request.user.login == 'renovate[bot]'
+    uses: ./.github/workflows/approve-pr.yml
+    with:
+      pr-number: ${{ github.event.pull_request.number }}
+      app-id: ${{ vars.APPROVE_APP_ID }}
+    secrets:
+      app-private-key: ${{ secrets.APPROVE_APP_PRIVATE_KEY }}
