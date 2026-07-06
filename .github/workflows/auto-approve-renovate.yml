@@ -2,7 +2,7 @@ name: Auto-approve Renovate PRs
 
 on:
   pull_request:
-    types: [auto_merge_enabled]
+    types: [opened, synchronize, reopened]
 
 jobs:
   approve:
