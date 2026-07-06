@@ -1,0 +1,9 @@
+{
+  "name": "renovate-test1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Renovate auto-merge verification sandbox",
+  "dependencies": {
+    "lodash": "4.17.15"
+  }
+}
